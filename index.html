@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>By David suczko</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@500;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Figtree', sans-serif;
+        user-select: none;
+        color: #fff;
+        font-weight: 700;
+    }
+
+
+    .announcementMenu {
+        display: none;
+        padding: 2.22vh 3.4vw;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.22vh;
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 0.4vh;
+        background: rgba(0, 0, 0, 0.664);
+    }
+
+    .announcementMenu > .info {
+        display: flex;
+        flex-direction: column;
+        gap: .9vh;
+    }
+
+    .announcementMenu > .info > .title {
+        font-size: 2.22vh;
+        text-align: center;
+        margin-left: .9vw;
+    }
+
+    .announcementMenu > .info > .desc {
+        font-size: 1.3vh;
+        font-weight: 500;
+        line-height: 1.94vh;
+        text-align: center;
+        margin-left: .9vw;
+    }
+
+    i {
+        color: yellow;
+        font-size: 2vw;
+        margin-left: -2.6vw;
+        margin-bottom: -2.9vw;
+    }
+
+</style>
+<body>
+    <div class="announcementMenu">
+        <div class="info">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div class="title">Czy chcesz zapisać?</div>
+            <div class="desc">Dodatkowy opis modala, jeżeli jest wymagany</div>
+        </div>
+    </div>
+</body>
+<script>
+    let HasConfirmMenu = false
+    window.addEventListener("message", function(event) {
+        switch (event.data.action) {
+
+
+            case "sendAnnouncement":
+                sendAnnouncement(event.data.data)
+            break;
+        }
+    })
+
+
+const sendAnnouncement = (data) => {
+    $(".announcementMenu").html(`
+        <div class="info">
+        <div class="title">${data.title}</div>
+        ${data.desc != undefined ? `<div class="desc">${data.desc}</div>` : ``}
+        </div>
+    `)
+    $('.announcementMenu').fadeIn(300).css("display", "flex")
+    setTimeout(() => {
+            $('.announcementMenu').css("display", "none");
+    }, data.time);
+}
+
+</script>
+</html>
