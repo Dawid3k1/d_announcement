@@ -11,8 +11,8 @@ end)
 
 RegisterNetEvent('otworzmenu', function()
     exports['d_announcement']:sendAnnouncement({
-		title = 'Czy chcesz kontyunować?',
-        desc = 'Tej akcji nie da się cofnąć, czy jesteś pewny?',
+	title = 'David jest super?',
+        desc = 'jbabdabdab?',
         time = 5000
 	})
 end)
